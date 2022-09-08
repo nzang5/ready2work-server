@@ -25,7 +25,10 @@ app.use("/api", allRoutes);
 
 
 const authRouter = require("./routes/auth.routes");          //  <== IMPORT
-app.use("/auth", authRouter);                             //  <== ADD
+app.use("/auth", authRouter);     
+
+const jobsRouter = require("./routes/JobPost.routes");          //  <== IMPORT
+app.use("/jobs", jobsRouter); //  <== ADD
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
