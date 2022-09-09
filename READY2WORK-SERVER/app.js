@@ -27,6 +27,8 @@ app.use("/api", allRoutes);
 const authRouter = require("./routes/auth.routes");          //  <== IMPORT
 app.use("/auth", authRouter);                             //  <== ADD
 
+const googleRoutes = require('./routes/google.routes')
+app.use('/api', googleRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
