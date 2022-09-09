@@ -25,7 +25,10 @@ app.use("/api", allRoutes);
 
 
 const authRouter = require("./routes/auth.routes");          //  <== IMPORT
-app.use("/auth", authRouter);                             //  <== ADD
+app.use("/auth", authRouter);     
+
+const jobsRouter = require("./routes/JobPost.routes");          //  <== IMPORT
+app.use("/jobs", jobsRouter); //  <== ADD
 
 const googleRoutes = require('./routes/google.routes')
 app.use('/api', googleRoutes);
