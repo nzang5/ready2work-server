@@ -4,6 +4,13 @@ const JobPost = require("../models/JobPost.model");
 
 const router = require("express").Router();
 
+router.get('/jobsList', (req, res) =>{
+    JobPost.find()
+    .then(foundList=> {
+        res.status(200).json(foundList)
+    })
+
+})
 
 router.post('/create', (req, res) => {
     console.log("made it here")
