@@ -46,10 +46,10 @@ if (email === '' || password === '' || name === '') {
       // If email is unique, proceed to hash the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
- 
+      let description = "";
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then` 
-      return User.create({ email, password: hashedPassword, name });
+      return User.create({ email, password: hashedPassword, name, description});
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
@@ -129,5 +129,25 @@ router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE
     // previously set as the token payload
     res.status(200).json(req.payload);
   });
+
+  router.put('/profile',(req,res)=>{
+    //Find user
+    const {email, description} = req.body;
+    User.findOneAndUpdate({email}, {description}, {new:true})
+    .then((updatedUser)=>{
+      console.log("successful", updatedUser)
+      res.status(200).json(updatedUser)
+    })
+    .catch(err =>console.log(err))
+  }); 
+
+  router.get('/profile', isAuthenticated, (req,res)=>{
+    User.findById(req.payload._id)
+    .then((user)=>{
+      res.status(200).json(user)
+    })
+    .catch(err=>{console.log(err)})
+  })
+  
 
 module.exports = router;
